@@ -7,13 +7,19 @@ $(function()
 						["E"  ,"F"  ,"1"  ,"2"  ,"3"  ,"+"],
 						["&nbsp;"  ,"&nbsp;"  ,"±"  ,"0"  ,"&nbsp;"  ,"="]	];
 
+	var html_str = "";
+
+	html_str += "<table><tbody>";
 	for(var i = 0; i < buttons_id.length; i++)
 	{
-		$cal_buttons.append("<tr>");
+		html_str += "<tr>";
 		for(var j = 0; j < buttons_id[i].length; j++)
 		{
-			$cal_buttons.append("<td>"+"<button id = " + buttons_id[i][j] + " >"+ buttons_id[i][j] +"</td>");	
+			html_str += "<td>"+"<button id = '" + buttons_id[i][j] + "'class = 'cal_button' >"+ buttons_id[i][j] +"</td>";	
 		}
-		$cal_buttons.append("</tr>");
+		html_str += "</tr>";
 	}	
+	html_str += "</tbody></table>";
+
+	$cal_buttons.html(html_str);
 });

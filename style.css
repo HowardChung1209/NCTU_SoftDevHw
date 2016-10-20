@@ -2,3 +2,83 @@ div
 {
 	display : block;
 }
+
+#calculator
+{
+	height: 480px;
+	width : 260px;
+
+	padding : 20px;
+
+	border-style : solid;
+	border-color : black;
+	border-width : 2px;
+	border-radius : 13px;
+}
+
+#cal_head
+{
+	height : 10%;
+	width : 100%;
+
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+}
+
+#cal_ans
+{
+	height : 10%;
+	width : 100%;
+
+	text-align: right;
+}
+
+#cal_bases
+{
+	height : 28%;
+	width : 100%;
+
+	font-weight: bold;
+	font-size: 15px;
+	text-align: left;
+}
+
+.base_title
+{
+	width : 20%;
+	height : 7%;
+
+	float : left;
+}
+
+.base_value
+{
+	height : 7%;
+	width : 70%;
+	margin-bottom: 15px;
+}
+
+#cal_buttons
+{
+	height : 50%;
+	width : 100%;
+}
+
+#cal_buttons > table
+{
+	height : 100%;
+	width : 100%;
+	table-layout: fixed;
+}
+
+.cal_button
+{
+	width : 100%;
+	height : 100%;
+
+	text-align: center;
+	font-size: 12px;
+
+	background-color: #f0e6e6;
+}
