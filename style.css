@@ -15,8 +15,8 @@ div
 	border-width : 2px;
 	border-radius : 13px;
 
-	background-color : black;
-	color : white;
+	background-color: black;
+	color: white;
 }
 
 #cal_head
@@ -29,12 +29,25 @@ div
 	text-align: center;
 }
 
+#cal_expr
+{
+	height : 5%;
+	width : 100%;
+	font-size: 13px;
+	text-align: right;
+}
+
 #cal_ans
 {
 	height : 10%;
 	width : 100%;
-
+	font-size: 20px;
 	text-align: right;
+}
+
+.cal_base_highlight
+{
+	color : blue;
 }
 
 #cal_bases
@@ -49,8 +62,8 @@ div
 
 .base_title
 {
-	width : 20%;
 	height : 7%;
+	width : 20%;
 
 	float : left;
 }
@@ -64,7 +77,7 @@ div
 
 #cal_buttons
 {
-	height : 50%;
+	height : 45%;
 	width : 100%;
 }
 
