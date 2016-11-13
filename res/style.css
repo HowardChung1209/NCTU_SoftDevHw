@@ -1,0 +1,101 @@
+div
+{
+	display : block;
+}
+
+#calculator
+{
+	height: 480px;
+	width : 260px;
+
+	padding : 20px;
+
+	border-style : solid;
+	border-color : black;
+	border-width : 2px;
+	border-radius : 13px;
+
+	background-color: black;
+	color: white;
+}
+
+#cal_head
+{
+	height : 10%;
+	width : 100%;
+
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+}
+
+#cal_expr
+{
+	height : 5%;
+	width : 100%;
+	font-size: 13px;
+	text-align: right;
+}
+
+#cal_ans
+{
+	height : 10%;
+	width : 100%;
+	font-size: 20px;
+	text-align: right;
+}
+
+.cal_base_highlight
+{
+	color : #4d94ff;
+	text-shadow: 0 0 3px #80b3ff;
+}
+
+#cal_bases
+{
+	height : 28%;
+	width : 100%;
+
+	font-weight: bold;
+	font-size: 15px;
+	text-align: left;
+}
+
+.base_title
+{
+	height : 7%;
+	width : 20%;
+
+	float : left;
+}
+
+.base_value
+{
+	height : 7%;
+	width : 70%;
+	margin-bottom: 15px;
+}
+
+#cal_buttons
+{
+	height : 45%;
+	width : 100%;
+}
+
+#cal_buttons > table
+{
+	height : 100%;
+	width : 100%;
+	table-layout: fixed;
+}
+
+.cal_button
+{
+	width : 100%;
+	height : 100%;
+
+	text-align: center;
+	font-size: 12px;
+
+	background-color: #f0e6e6;
+}
