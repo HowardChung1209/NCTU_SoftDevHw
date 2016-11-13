@@ -47,7 +47,8 @@ div
 
 .cal_base_highlight
 {
-	color : blue;
+	color : #4d94ff;
+	text-shadow: 0 0 3px #80b3ff;
 }
 
 #cal_bases
