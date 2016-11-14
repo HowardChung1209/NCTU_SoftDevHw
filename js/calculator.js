@@ -3,6 +3,7 @@ function Calculator()
 	this.expr = "";
 	this.showExpr = "";
 	this.number = "";
+	this.sign = "";
 	this.base = 10;
 }
 
@@ -13,17 +14,13 @@ Calculator.prototype.push_back = function(c)
 {
 	if( this.operators[c] )
 	{
-		this.showExpr += this.number + c;
+		this.showExpr += "(" + this.sign + this.number + ")" + c;
 		this.expr += this.baseVal(10) + c;
 		this.number = "";
+		this.sign = "";
 	}
 	else
 	{
-		if( this.digits[c] >= this.base && this.digits[c] >= 10 )
-			this.base = 16;
-		else if( this.digits[c] >= this.base )
-			this.base = 10;
-
 		this.number += ""+c;
 	}
 };
@@ -65,7 +62,7 @@ Calculator.prototype.expression = function()
 
 Calculator.prototype.curNumber = function()
 {
-	var result = parseInt(this.number,this.base).toString(this.base);
+	var result = parseInt(this.sign+this.number,this.base).toString(this.base);
 
 	if( this.number == "" )
 		return 0;
@@ -85,10 +82,20 @@ Calculator.prototype.baseVal = function(b)
 
 Calculator.prototype.changeBase = function(b)
 {
+
+	this.number = parseInt(this.number | "0",this.base).toString(b);
 	this.base = b;
 }
 
 Calculator.prototype.getBase = function()
 {
 	return this.base;
+}
+
+Calculator.prototype.signIt = function()
+{
+	if( this.sign == "" )
+		this.sign = "-";
+	else
+		this.sign = "";
 }

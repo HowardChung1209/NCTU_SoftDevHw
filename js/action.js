@@ -1,30 +1,40 @@
 var $showExpr;
 var $showNumber;
-var $hex,$dec,$oct,$bin;
-var $hex_val,$dec_val,$oct_val,$bin_val;
+var bases = [];
+var alpha = "ABCDEF";
 
 function update()
 {
 	$showExpr.text(cal.expression());
 	$showNumber.text(cal.curNumber());
-	$hex_val.text(cal.baseVal(16));
-	$dec_val.text(cal.baseVal(10));
-	$oct_val.text(cal.baseVal(8));
-	$bin_val.text(cal.baseVal(2));
 
-	$hex.removeClass("cal_base_highlight");
-	$dec.removeClass("cal_base_highlight");
-	$oct.removeClass("cal_base_highlight");
-	$bin.removeClass("cal_base_highlight");
+	for(var i = 0; i < 4; i++)
+	{
+		bases[i].val.text(cal.baseVal(bases[i].b));
+		bases[i].div.removeClass("cal_base_highlight");
 
-	if( cal.getBase() == 16 )
-		$hex.addClass("cal_base_highlight");
-	else if( cal.getBase() == 10 )
-		$dec.addClass("cal_base_highlight");
-	else if( cal.getBase() == 8 )
-		$oct.addClass("cal_base_highlight");
-	else if( cal.getBase() == 2 )
-		$bin.addClass("cal_base_highlight");
+		if( cal.getBase() == bases[i].b )
+			bases[i].div.addClass("cal_base_highlight");
+	}
+
+	for(var i = 0; i < 10; i++)
+	{
+		if( i >= cal.getBase() )
+			$("#_"+i).attr("disabled", true);
+		else
+			$("#_"+i).attr("disabled", false);
+	}
+
+	if( cal.getBase() < 16 )
+	{
+		for(var i = 0; i < 6; i++)
+			$("#_"+alpha[i]).attr("disabled", true);
+	}
+	else
+	{
+		for(var i = 0; i < 6; i++)
+			$("#_"+alpha[i]).attr("disabled", false);
+	}
 }
 
 function gen(i)
@@ -36,21 +46,55 @@ function gen(i)
 			});
 }
 
+function gen_2(i)
+{
+	return (function(){
+				cal.changeBase(bases[i].b);
+				update();
+			});
+}
+
 $(function()
 {
 	$showExpr = $("#cal_expr");
 	$showNumber = $("#cal_ans");
-	$hex = $("#hex"); $hex_val = $("#hex > .base_value");
-	$dec = $("#dec"); $dec_val = $("#dec > .base_value");
-	$oct = $("#oct"); $oct_val = $("#oct > .base_value");
-	$bin = $("#bin"); $bin_val = $("#bin > .base_value");
+
+	bases.push(
+		{
+			b : 16,
+			div : $("#hex"),
+			val : $("#hex > .base_value")
+		}
+	);
+
+	bases.push(
+		{
+			b : 10,
+			div : $("#dec"),
+			val : $("#dec > .base_value")
+		}
+	);
+
+	bases.push(
+		{
+			b : 8,
+			div : $("#oct"),
+			val : $("#oct > .base_value")
+		}
+	);
+
+	bases.push(
+		{
+			b : 2,
+			div : $("#bin"),
+			val : $("#bin > .base_value")
+		}
+	);
+
 	for(var i = 0; i <= 9; i++)
 	{
 		$("#_"+i).click(gen(i));
 	}
-
-	
-	alpha = "ABCDEF";
 
 	for(var i in alpha)
 	{
@@ -85,23 +129,15 @@ $(function()
 		update();
 	});
 
-	$hex.click(function(){
-		cal.changeBase(16);
+	for(var i = 0; i < 4; i++)
+	{
+		bases[i].div.click(gen_2(i));
+	}
+
+	$("#_sign").click(function(){
+		cal.signIt();
 		update();
 	});
 
-	$dec.click(function(){
-		cal.changeBase(10);
-		update();
-	});
-
-	$oct.click(function(){
-		cal.changeBase(8);
-		update();
-	});
-
-	$bin.click(function(){
-		cal.changeBase(2);
-		update();
-	});
+	update();
 });

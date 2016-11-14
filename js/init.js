@@ -15,7 +15,7 @@ $(function()
 						["A"  ,"B"  ,"7"  ,"8"  ,"9"  ,"Multiply"],
 						["C"  ,"D"  ,"4"  ,"5"  ,"6"  ,"Minus"],
 						["E"  ,"F"  ,"1"  ,"2"  ,"3"  ,"Plus"],
-						["xxx"  ,"xxx"  ,"±"  ,"0"  ,"xxx"  ,"Equal"]	];
+						["xxx"  ,"xxx"  ,"sign"  ,"0"  ,"xxx"  ,"Equal"]	];
 
 	var html_str = "";
 
