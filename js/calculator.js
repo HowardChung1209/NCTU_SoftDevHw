@@ -14,10 +14,11 @@ Calculator.prototype.push_back = function(c)
 {
 	if( this.operators[c] )
 	{
-		this.showExpr += "(" + this.sign + this.number + ")" + c;
-		this.expr += this.baseVal(10) + c;
+		this.showExpr += this.sign + this.number + c;
+		this.expr += "(" + this.sign + this.baseVal(10) + ")" + c;
 		this.number = "";
 		this.sign = "";
+
 	}
 	else
 	{
@@ -42,11 +43,13 @@ Calculator.prototype.value = function()
 
 Calculator.prototype.clear = function()
 {
+	this.sign = "";
 	this.number = "";
 }
 
 Calculator.prototype.clearAll = function()
 {
+	this.sign = "";
 	this.number = "";
 	this.expr = "";
 	this.showExpr = "";
@@ -82,7 +85,6 @@ Calculator.prototype.baseVal = function(b)
 
 Calculator.prototype.changeBase = function(b)
 {
-
 	this.number = parseInt(this.number | "0",this.base).toString(b);
 	this.base = b;
 }
