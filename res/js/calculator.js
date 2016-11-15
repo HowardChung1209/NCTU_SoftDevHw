@@ -3,27 +3,23 @@ function Calculator()
 	this.expr = "";
 	this.showExpr = "";
 	this.number = "";
+	this.sign = "";
 	this.base = 10;
 }
 
 Calculator.prototype.operators = {"+" : true, "-" : true, "*" : true, "/" : true, "%" : true};
-Calculator.prototype.digits = {"0" : 0, "1" : 1, "2" : 2, "3" : 3, "4" : 4, "5" : 5, "6" : 6, "7" : 7, "8" : 8, "9" : 9, "A" : 10, "B" : 11, "C" : 12, "D" : 13, "E" : 14, "F" : 15};
 
 Calculator.prototype.push_back = function(c)
 {
 	if( this.operators[c] )
 	{
-		this.showExpr += this.number + c;
-		this.expr += this.baseVal(10) + c;
+		this.showExpr += this.realVal() + c;
+		this.expr += "(" + this.realVal() + ")" + c;
 		this.number = "";
+		this.sign = "";
 	}
 	else
 	{
-		if( this.digits[c] >= this.base && this.digits[c] >= 10 )
-			this.base = 16;
-		else if( this.digits[c] >= this.base )
-			this.base = 10;
-
 		this.number += ""+c;
 	}
 };
@@ -35,21 +31,24 @@ Calculator.prototype.pop_back = function()
 
 Calculator.prototype.value = function()
 {
-	this.expr += this.baseVal(10);
+	this.expr += "(" + this.realVal() + ")";
 	console.log(this.expr);
 	this.number = eval(this.expr).toString(this.base);
 	
+	this.sign = "";
 	this.expr = "";
 	this.showExpr = "";
 }
 
 Calculator.prototype.clear = function()
 {
+	this.sign = "";
 	this.number = "";
 }
 
 Calculator.prototype.clearAll = function()
 {
+	this.sign = "";
 	this.number = "";
 	this.expr = "";
 	this.showExpr = "";
@@ -65,8 +64,18 @@ Calculator.prototype.expression = function()
 
 Calculator.prototype.curNumber = function()
 {
-	var result = parseInt(this.number,this.base).toString(this.base);
+	var result = parseInt(this.sign+this.number,this.base).toString(this.base);
 
+	if( this.number == "" )
+		return 0;
+
+	return result;
+}
+
+Calculator.prototype.realVal = function()
+{
+	var result = parseInt(this.sign+this.number,this.base).toString(10);
+		
 	if( this.number == "" )
 		return 0;
 
@@ -75,7 +84,7 @@ Calculator.prototype.curNumber = function()
 
 Calculator.prototype.baseVal = function(b)
 {
-	var result = parseInt(this.number,this.base).toString(b);
+	var result = ((parseInt(this.sign+this.number,this.base)>>>0)&0xFFFF).toString(b);
 		
 	if( this.number == "" )
 		return 0;
@@ -85,10 +94,19 @@ Calculator.prototype.baseVal = function(b)
 
 Calculator.prototype.changeBase = function(b)
 {
+	this.number = parseInt(this.number | "0",this.base).toString(b);
 	this.base = b;
 }
 
 Calculator.prototype.getBase = function()
 {
 	return this.base;
+}
+
+Calculator.prototype.signIt = function()
+{
+	if( this.sign == "" )
+		this.sign = "-";
+	else
+		this.sign = "";
 }
