@@ -94,7 +94,7 @@ Calculator.prototype.baseVal = function(b)
 
 Calculator.prototype.changeBase = function(b)
 {
-	this.number = parseInt(this.number | "0",this.base).toString(b);
+	this.number = parseInt(this.number || "0",this.base).toString(b);
 	this.base = b;
 }
 
